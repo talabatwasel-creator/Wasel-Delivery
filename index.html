@@ -1,9 +1,37 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
+
+
+    <!-- Manifest لخاصية PWA -->
+<link rel="manifest" href="manifest.json">
+
+<!-- أيقونات مفضلة -->
+<link rel="icon" href="icon.png" type="image/png">
+
+<!-- تعريف الألوان لشريط العنوان في المتصفح والجوال -->
+<meta name="theme-color" content="#ff6600">
+<meta name="background-color" content="#ffffff">
+
+<!-- تسجيل الـService Worker -->
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('/sw.js')
+        .then(reg => console.log('Service Worker مسجّل:', reg))
+        .catch(err => console.log('فشل تسجيل Service Worker:', err));
+    });
+  }
+</script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wasel Delivery - طلبات </title>
+    <title>Wasel Delivery - طلبات</title>
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#006d77">
+
     <style>
         :root { --orange: #f26522; --teal: #006d77; --bg: #fdfaf5; }
         body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: var(--bg); margin: 0; padding: 0; color: #333; }
@@ -47,7 +75,23 @@
             <a href="https://wa.me/96181138631?text=أريد%20الطلب%20من%20مطعم%20المحطة" class="btn-wa">اطلب عبر واتساب</a>
         </div>
     </div>
+    
+    <div class="card">
+        <div class="scroll-container">
+            <a><img src="abukhalil.jpg" class="menu-img"></a>
+            <a><img src="abukhalil2.jpg" class="menu-img"></a>
+            <a><img src="abukhalil3.jpg" class="menu-img"></a>
+        </div>
+        <div class="card-content">
+            <h3>مطعم ابو خليل </h3>
+            <a href="https://wa.me/96181138631?text=أريد%20الطلب%20من%20مطعم%20ابو%20خليل" class="btn-wa">اطلب عبر واتساب</a>
+        </div>
+    </div>
 </div>
 
-</body>
-</html>
+<!-- Register Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+    .then(() => console.log('Service Worker Registered'))
+    .catch(err => console.log('Service Worker Faile
