@@ -56,6 +56,51 @@
     <p>اختر متجرك واضغط للطلب مباشرة</p>
 </header>
 
+<!-- شريط البحث فوق البطاقات -->
+<div style="max-width:400px; margin:20px auto; position:relative;">
+    <input type="text" id="searchInput" placeholder="ابحث عن متجرك..." 
+           style="padding:10px 15px; border-radius:25px; border:1px solid var(--teal); width:100%; outline:none; font-size:16px; color:var(--teal);">
+    <ul id="searchResults" style="position:absolute; top:45px; left:0; right:0; background:white; color:black; list-style:none; margin:0; padding:0; border-radius:10px; max-height:200px; overflow-y:auto; display:none; z-index:1000; box-shadow:0 2px 10px rgba(0,0,0,0.15);"></ul>
+</div>
+
+<script>
+// قائمة المتاجر مع روابط واتساب
+const stores = [
+    { name: "ملحمة ومشاوي عطوي", url: "https://wa.me/96181138631?text=أريد%20الطلب%20من%20ملحمة%20ومشاوي%20عطوي" },
+    { name: "مطعم المحطة", url: "https://wa.me/96181138631?text=أريد%20الطلب%20من%20مطعم%20المحطة" },
+    { name: "مطعم ابو خليل", url: "https://wa.me/96181138631?text=أريد%20الطلب%20من%20مطعم%20ابو%20خليل" }
+];
+
+const input = document.getElementById('searchInput');
+const results = document.getElementById('searchResults');
+
+input.addEventListener('input', () => {
+    const query = input.value.toLowerCase();
+    results.innerHTML = '';
+    if(query){
+        const filtered = stores.filter(store => store.name.toLowerCase().includes(query));
+        filtered.forEach(store => {
+            const li = document.createElement('li');
+            li.textContent = store.name;
+            li.style.padding = '10px 15px';
+            li.style.cursor = 'pointer';
+            li.style.borderBottom = '1px solid #eee';
+            li.addEventListener('click', () => window.location.href = store.url);
+            results.appendChild(li);
+        });
+        results.style.display = filtered.length ? 'block' : 'none';
+    } else {
+        results.style.display = 'none';
+    }
+});
+
+// إخفاء القائمة عند النقر خارجها
+document.addEventListener('click', e => {
+    if(!input.contains(e.target)) results.style.display = 'none';
+});
+</script>
+
+
 <div class="container">
     <div class="card">
         <a><img src="atwi.jpg" class="menu-img"></a>
